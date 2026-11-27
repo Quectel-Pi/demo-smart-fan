@@ -1,0 +1,21 @@
+[Unit]
+Description=Smart Fan Demo
+After=multi-user.target
+Wants=network.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/userdata/smart-fan
+Environment=PYTHONPATH=/userdata/smart-fan/app
+Environment=PYTHONUNBUFFERED=1
+ExecStart=/usr/bin/python3 -m smart_fan.main --config /userdata/smart-fan/config/smart_fan.json
+Restart=on-failure
+RestartSec=2
+TimeoutStopSec=10
+KillSignal=SIGTERM
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

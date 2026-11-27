@@ -1,0 +1,128 @@
+{
+  "device": {
+    "name": "smart-fan-demo",
+    "log_level": "info"
+  },
+  "vision": {
+    "device": "/dev/video73",
+    "width": 640,
+    "height": 480,
+    "fps": 30,
+    "infer_fps": 10,
+    "model": "/userdata/smart-fan/models/yolov8s-640-640.rknn",
+    "labels": "/userdata/smart-fan/models/coco_80_labels_list.txt",
+    "person_class": 0,
+    "confidence": 0.3,
+    "min_box_height_ratio": 0.15,
+    "target_hold_sec": 1.5,
+    "center_after_sec": 10.0,
+    "fan_off_after_sec": 30.0,
+    "min_height_ratio": 0.12,
+    "min_aspect": 0.55,
+    "targeting": {
+      "prefer_group_count": true,
+      "group_distance": 0.12,
+      "min_height": 0.12,
+      "max_height": 0.98,
+      "min_area": 0.008,
+      "max_center_jump": 0.22,
+      "switch_confirm_sec": 0.8,
+      "detection_hold_sec": 1.0
+    },
+    "snapshot_fps": 15.0
+  },
+  "servo": {
+    "pwm_id": "2ade3000.pwm",
+    "center_angle": 180.0,
+    "min_angle": 20.0,
+    "max_angle": 250.0,
+    "invert": true,
+    "deadband": 0.03,
+    "kp": 120.0,
+    "kd": 6.0,
+    "max_rate_deg_s": 55.0,
+    "max_step_deg": 2.75,
+    "keep_enabled_on_exit": false,
+    "range_deg": 270.0,
+    "initial_angle": 180.0,
+    "hold_sec": 3.0,
+    "center_after_sec": 10.0,
+    "min_tracking_height": 0.18,
+    "soft_start_sec": 0.8,
+    "acquire_rate_deg_s": 28.0
+  },
+  "fan": {
+    "pwm_id": "2add5000.pwm",
+    "physical_pin": "40Pin-35 / GPIO2_C6 / PWM1_CH5_M2",
+    "frequency_hz": 25000,
+    "polarity": "inversed",
+    "levels": {
+      "off": 0.0,
+      "low": 0.7,
+      "medium": 0.8,
+      "high": 0.9,
+      "max": 1.0
+    },
+    "default_level": "medium"
+  },
+  "voice": {
+    "audio_device": "plughw:CARD=rockchipes8389,DEV=0",
+    "sample_rate": 16000,
+    "channels": 1,
+    "sample_format": "S16_LE",
+    "capture_volume": 225,
+    "capture_pga": 6,
+    "capture_warmup_sec": 1.0,
+    "min_input_peak": 1000,
+    "min_input_peak_en": 550,
+    "min_input_peak_wake_en": 500,
+    "min_input_rms": 90.0,
+    "min_speech_sec": 0.3,
+    "min_speech_sec_en": 0.22,
+    "min_speech_sec_wake_en": 0.18,
+    "endpoint_silence_sec": 0.7,
+    "max_utterance_sec": 7.0,
+    "partial_confirm_chunks": 2,
+    "unrecognized_cooldown_sec": 2.0,
+    "wake_retry_sec": 4.0,
+    "vosk_lib": "/userdata/smart-fan/vendor/vosk/libvosk.so",
+    "model": "/userdata/smart-fan/models/vosk-model-small-cn-0.22",
+    "model_en": "/userdata/smart-fan/models/vosk-model-small-en-us-0.15",
+    "enabled_languages": ["zh", "en"],
+    "wake_word": "小风小风",
+    "wake_word_en": "hey fan",
+    "announce_wake_en": true,
+    "wake_timeout_sec": 5.0,
+    "wake_timeout_sec_en": 10.0,
+    "wake_retry_sec_en": 6.0,
+    "command_cooldown_sec": 1.5,
+    "mixer_card": 0
+  },
+  "timer": {
+    "default_minutes": 10,
+    "persist_path": "/userdata/smart-fan/state/timer.json"
+  },
+  "api": {
+    "listen": "127.0.0.1",
+    "port": 8090
+  },
+  "speaker": {
+    "enabled": true,
+    "audio_device": "plughw:CARD=rockchipes8389,DEV=0",
+    "assets_dir": "/userdata/smart-fan/voice",
+    "mixer_card": 0,
+    "volume": "80%",
+    "queue_size": 4,
+    "voice_guard_sec": 0.6
+  },
+  "behavior": {
+    "search_after_sec": 5.0,
+    "search_speed_deg_s": 12.0,
+    "search_min_angle": 60.0,
+    "search_max_angle": 220.0,
+    "standby_after_sec": 60.0,
+    "auto_off_enabled": true,
+    "found_announce_cooldown_sec": 20.0,
+    "target_confirm_sec": 0.3
+  }
+}
